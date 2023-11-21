@@ -9,19 +9,21 @@ function App() {
   const onClick = () => setValue((prev) => prev + 1);
   const onChange = (event) => setKeyword(event.target.value);
 
-  console.log("I run all the time.");
-
-  // 이 함수는 처음에 딱 한번만 실행되고 useEffect 설정을 한 이유로 그 다음엔 실행을 안함.
   useEffect(() => {
-    console.log("CALL THE API...");
+    console.log("I run only once.");
   }, []);
 
-  // []안에 keyword를 집어넣기 때문에 keyword가 변경 될때만 실행된다.
   useEffect(() => {
-    if (keyword !== "" && keyword.length > 5) {
-      console.log("SEARCH FOR", keyword);
-    }
+    console.log("I run when 'keyword' changes.");
   }, [keyword]);
+
+  useEffect(() => {
+    console.log("I run when couner changes.");
+  }, [counter]);
+
+  useEffect(() => {
+    console.log("I run when counter & keyword changes.");
+  }, [keyword, counter]);
 
   return (
     <div>

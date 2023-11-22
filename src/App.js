@@ -1,46 +1,20 @@
-import { useEffect, useState } from "react";
+import Home from "./routes/Home";
+import Detail from "./routes/Detail";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const url =
-  "https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year";
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/movie",
+    element: <Detail />,
+  },
+]);
 
 function App() {
-  const [loading, setLoading] = useState(true);
-  const [movies, setMovies] = useState([]);
-  const getMovies = async () => {
-    const json = await (await fetch(url)).json();
-    setMovies(json.data.movies);
-    setLoading(false);
-  };
-  useEffect(() => {
-    getMovies();
-  }, []);
-  console.log(movies);
-  return (
-    <div>
-      {loading ? (
-        <h1>Loading...</h1>
-      ) : (
-        <div>
-          {movies.map((movie) => (
-            /* map데이터를 표시하는 경우는 key 설정을 해라. */
-            <div key={movie.id}>
-              <img alt="" src={movie.medium_cover_image} />
-              <h2>
-                {movie.title}({movie.year})
-              </h2>
-              <p>{movie.summary}</p>
-              <ul>
-                {movie.genres.map((g) => (
-                  /* 고유의 id가 없으면 그냥 배열값 쓰면 됨. */
-                  <li key={g}>{g}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

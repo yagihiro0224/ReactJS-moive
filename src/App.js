@@ -22,12 +22,13 @@ function App() {
       ) : (
         <div>
           {movies.map((movie) => (
+            /* map데이터를 표시하는 경우는 key 설정을 해라. */
             <div key={movie.id}>
               <h2>{movie.title}</h2>
               <p>{movie.summary}</p>
               <ul>
                 {movie.genres.map((g) => (
-                  /*고유의 id가 없으면 그냥 배열값 쓰면 됨.*/
+                  /* 고유의 id가 없으면 그냥 배열값 쓰면 됨. */
                   <li key={g}>{g}</li>
                 ))}
               </ul>

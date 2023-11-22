@@ -24,7 +24,10 @@ function App() {
           {movies.map((movie) => (
             /* map데이터를 표시하는 경우는 key 설정을 해라. */
             <div key={movie.id}>
-              <h2>{movie.title}</h2>
+              <img alt="" src={movie.medium_cover_image} />
+              <h2>
+                {movie.title}({movie.year})
+              </h2>
               <p>{movie.summary}</p>
               <ul>
                 {movie.genres.map((g) => (

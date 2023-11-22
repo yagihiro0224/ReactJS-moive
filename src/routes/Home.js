@@ -15,18 +15,20 @@ function Home() {
   useEffect(() => {
     getMovies();
   }, []);
-  console.log(movies);
+  // console.log(movies);
   return (
     <div>
       {loading ? (
         <h1>Loading...</h1>
       ) : (
         <div>
-          {movies.map((movie) => (
+            {movies.map((movie) => (
+            /* 얘는 movies가 배열이라 map 함수를 썼을때 */
             <Movie
               /* [중요] key는 reactJS에서 map안에 component들을 
               render할 때 사용하므로 설정해야함. */
               key={movie.id}
+              id={movie.id}
               coverImg={movie.medium_cover_image}
               title={movie.title}
               summary={movie.summary}

@@ -26,12 +26,10 @@ function App() {
               <h2>{movie.title}</h2>
               <p>{movie.summary}</p>
               <ul>
-                {
-                  /*배열일 경우*/
-                  movie.genres.map((g) => (
-                    <li>{g}</li>
-                  ))
-                }
+                {movie.genres.map((g) => (
+                  /*고유의 id가 없으면 그냥 배열값 쓰면 됨.*/
+                  <li key={g}>{g}</li>
+                ))}
               </ul>
             </div>
           ))}

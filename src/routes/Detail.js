@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MovieDetail from "../components/MovieDetail";
 
@@ -8,17 +8,16 @@ function Detail() {
   const [loading, setLoading] = useState(true);
   const [movieDetail, setMovieDetail] = useState([]);
   const { id } = useParams();
-  const getMovieDetail = async () => {
+  const getMovieDetail = useCallback(async () => {
     const json = await (await fetch(`${url}${id}`)).json();
     console.log(json);
     setMovieDetail(json.data.movie);
     setLoading(false);
-  };
+  }, [id]);
 
   useEffect(() => {
     getMovieDetail();
-    // eslint-disable-next-line
-  }, []);
+  }, [getMovieDetail]);
 
   return (
     <div>

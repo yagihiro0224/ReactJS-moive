@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Movie from "../components/Movie";
+import styles from "./Home.module.css";
 
 const url =
   "https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year";
@@ -17,12 +18,14 @@ function Home() {
   }, []);
   // console.log(movies);
   return (
-    <div>
+    <div className={styles.container}>
       {loading ? (
-        <h1>Loading...</h1>
+        <div className={styles.loader}>
+          <h1>Loading...</h1>
+        </div>
       ) : (
-        <div>
-            {movies.map((movie) => (
+        <div className={styles.movies}>
+          {movies.map((movie) => (
             /* 얘는 movies가 배열이라 map 함수를 썼을때 */
             <Movie
               /* [중요] key는 reactJS에서 map안에 component들을 
@@ -31,6 +34,7 @@ function Home() {
               id={movie.id}
               coverImg={movie.medium_cover_image}
               title={movie.title}
+              year={movie.year}
               summary={movie.summary}
               genres={movie.genres}
             />
